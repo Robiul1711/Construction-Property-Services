@@ -12,7 +12,7 @@
 
   /* color */
 
-  --color-primary: green;
+  --color-theme-primary: #81b4e2;
   --color-bg-custom: linear-gradient(red, yellow);
 
   /* breakpoint */
@@ -178,10 +178,8 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   body {
+    font-family: var(--font-poppins);
     @apply bg-background text-foreground;
   }
 }
