@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
@@ -12,13 +12,31 @@ const Navbar = () => {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Portfolio", href: "/portfolio" },
+    { name: "Case Studies", href: "/case-studies" },
     { name: "Contact", href: "/contact" },
   ];
+ const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <>
       {/* Navbar */}
-      <nav className="section-padding-x fixed top-0 left-0 w-full z-50 bg-[#5e9dd4] border-b border-white">
+     <nav
+      className={`fixed  section-padding-x top-0 left-0 w-full z-50 transition-all duration-300
+        ${
+          scrolled
+            ? "bg-black/40 backdrop-blur-xl shadow-lg "
+            : "bg-black/40"
+        }`}
+    >
         <div className="px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-white text-2xl font-bold">
