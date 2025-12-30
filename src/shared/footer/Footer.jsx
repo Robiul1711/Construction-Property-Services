@@ -4,7 +4,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer
-      className="section-padding-x section-padding-y text-gray-400 py-12 px-6"
+      className="section-padding-x text-gray-400 py-12 lg:pt-28 px-6 z-20"
       style={{ backgroundImage: `url(${ImageProvider.footer})` }}
     >
       <div className="">
