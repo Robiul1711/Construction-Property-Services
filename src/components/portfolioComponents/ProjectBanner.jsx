@@ -22,7 +22,7 @@ const ProjectBanner = () => {
   ];
 
   return (
-    <section className="section-padding-x section-padding-y mt-20">
+    <section className="section-padding-x  mt-40">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         {/* Left Text */}

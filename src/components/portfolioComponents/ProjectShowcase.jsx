@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowUpRight, BedDouble, Bath, Ruler } from "lucide-react";
 import house from "@/assets/images/ps1.png"; // use your image
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 const projects = Array(9).fill({
   title: "Kings Down",
   image: house,
@@ -24,7 +25,7 @@ const ProjectShowcase = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
         {projects.map((project, index) => (
-          <div
+          <Link to={`/case-studies/${project.title}`}
             key={index}
             className="relative rounded-2xl overflow-hidden bg-black group shadow-lg"
           >
@@ -54,7 +55,7 @@ const ProjectShowcase = () => {
               <InfoBadge icon={<Bath size={14} />} text={project.baths} />
               <InfoBadge icon={<Ruler size={14} />} text={project.size} />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
        <div className="flex items-center justify-center mt-8 gap-3">
