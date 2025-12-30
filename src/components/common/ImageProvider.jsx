@@ -20,6 +20,7 @@ import portfolio2 from "../../assets/images/portfolio2.png";
 import portfolio3 from "../../assets/images/portfolio3.png";
 import portfolio4 from "../../assets/images/portfolio4.png";
 import portfolio5 from "../../assets/images/portfolio5.png";
+import about from "../../assets/images/about.png";
 
 export const ImageProvider = {
   logo,
@@ -44,4 +45,5 @@ export const ImageProvider = {
   portfolio3,
   portfolio4,
   portfolio5,
+  about,
 };
