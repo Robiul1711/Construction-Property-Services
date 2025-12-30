@@ -51,12 +51,12 @@ const Accordian = () => {
               className="flex gap-2 cursor-pointer items-center justify-between w-full"
               onClick={() => handleBorderClick(index)}
             >
-              <h2 className="text-[#131313] font-[500] text-[1.3rem]">
+              <h2 className="text-[#131313] font-[500] text-[1.1rem] lg:text-[1.3rem]">
                 {according.title}
               </h2>
               <p>
                 <FaPlus
-                  className={`text-[1.3rem] dark:text-slate-600 text-text transition-all duration-300 ${
+                  className={`text-[1rem] lg:text-[1.3rem] dark:text-slate-600 text-text transition-all duration-300 ${
                     isPlusAccording === index &&
                     "rotate-[45deg] !text-[#131313]"
                   }`}
