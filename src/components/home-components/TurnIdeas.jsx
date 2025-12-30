@@ -4,7 +4,14 @@ import { ImageProvider } from "../common/ImageProvider";
 const TurnIdeas = () => {
   return (
     <div
-      className="section-padding-x py-12 lg:py-24 xl:py-44 relative my-6  text-white overflow-hidden"
+      className="
+        section-padding-x 
+        py-12 lg:py-24 xl:py-44 
+        relative my-6 text-white overflow-hidden
+        bg-no-repeat bg-cover
+        bg-center
+        lg:bg-top 
+      "
       style={{ backgroundImage: `url(${ImageProvider.turn})` }}
     >
       {/* Large background numbers */}
@@ -21,7 +28,7 @@ const TurnIdeas = () => {
       </div>
 
       {/* Header Section */}
-      <div className="mb-16 md:mb-24 max-w-lg">
+      <div className="mb-16 md:mb-24 max-w-lg relative z-10">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-6">
           How We Turn Ideas Into Results
         </h2>
@@ -33,7 +40,7 @@ const TurnIdeas = () => {
       </div>
 
       {/* Steps Grid */}
-      <div className="relative w-full min-h-[150px]">
+      <div className="relative w-full min-h-[150px] z-10">
         {/* Planning */}
         <div className="relative lg:absolute lg:-top-60 lg:right-0 max-w-md mb-10 lg:mb-0">
           <h3 className="text-2xl md:text-3xl font-semibold">Planning</h3>

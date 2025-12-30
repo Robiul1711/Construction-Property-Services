@@ -81,7 +81,7 @@ const ClientSays = () => {
 
               {/* Content */}
               <div className="md:pl-8 lg:pl-12">
-                <p className="text-lg md:text-xl lg:text-2xl text-gray-900 font-medium mb-8 leading-relaxed max-w-5xl mx-auto">
+                <p className="sm:text-lg md:text-xl lg:text-2xl text-gray-900 font-medium mb-8 leading-relaxed max-w-5xl mx-auto">
                   {testimonials[activeIndex].text}
                 </p>
 

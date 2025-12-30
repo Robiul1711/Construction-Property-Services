@@ -10,38 +10,60 @@ const AboutBanner = () => {
       <img
         src={ImageProvider.about}
         alt="Contact Banner"
-        className="w-full h-[580px] object-cover 
-          transition-transform duration-700 ease-out 
-          group-hover:scale-110"
+        className="
+          w-full 
+          h-[380px] sm:h-[460px] md:h-[520px] lg:h-[680px]
+          object-cover
+          transition-transform duration-700 ease-out
+          group-hover:scale-110
+        "
       />
 
       {/* Dark Overlay */}
       <div
-        className="absolute top-0 left-0 w-full h-full 
-          bg-black/60 
+        className="
+          absolute top-0 left-0 w-full h-full
+          bg-black/60
           transition-opacity duration-500
-          group-hover:bg-black/40"
-      ></div>
+          group-hover:bg-black/40
+        "
+      />
 
       {/* Content */}
       <div
-        className="absolute top-0 left-0 w-full h-full 
-          flex flex-col justify-center items-center gap-6 text-white
+        className="
+          absolute inset-0
+          flex flex-col justify-center items-center
+          gap-4 sm:gap-5 md:gap-6
+          px-4 sm:px-6
+          text-white
           transition-all duration-500
-          group-hover:translate-y-[-4px]"
+          group-hover:-translate-y-1
+        "
       >
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-semibold
+          className="
+            text-2xl sm:text-3xl md:text-5xl lg:text-7xl
+            font-semibold
+            text-center
+            leading-tight
             transition-transform duration-500
-            group-hover:scale-105"
+            group-hover:scale-105
+          "
         >
           Building Trust, Transforming Properties
         </h1>
 
         <p
-          className="max-w-3xl mx-auto text-center text-white/90
+          className="
+            max-w-xl sm:max-w-2xl lg:max-w-3xl
+            mx-auto
+            text-center
+            text-sm sm:text-base md:text-lg
+            text-white/90
             transition-opacity duration-500
-            group-hover:opacity-100"
+            group-hover:opacity-100
+          "
         >
           For over two decades, we've been the trusted partner for property
           owners and investors seeking excellence in property management and
@@ -50,13 +72,18 @@ const AboutBanner = () => {
 
         {/* Breadcrumb */}
         <div
-          className="flex items-center gap-2 text-white cursor-pointer
+          className="
+            flex items-center gap-2
+            text-white cursor-pointer
             transition-all duration-300
-           group-hover:gap-3"
+            group-hover:gap-3
+          "
         >
-          <FaHome className="text-2xl" />
+          <FaHome className="text-lg sm:text-xl md:text-2xl" />
           <FaAngleRight />
-          <p className="text-lg font-medium">About Us</p>
+          <p className="text-sm sm:text-base md:text-lg font-medium">
+            About Us
+          </p>
         </div>
       </div>
     </div>

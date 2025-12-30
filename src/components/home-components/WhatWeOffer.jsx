@@ -36,12 +36,12 @@ const WhatWeOffer = () => {
       </div>
 
       {/* Categories */}
-      <div className="flex justify-center gap-4 mb-12">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-6 py-2 rounded-full text-sm transition cursor-pointer ${
+            className={`px-5 sm:px-6 py-2 rounded-full text-sm transition cursor-pointer ${
               activeCategory === cat
                 ? "bg-black text-white"
                 : "border border-gray-300 text-gray-600"
@@ -56,7 +56,6 @@ const WhatWeOffer = () => {
       <div className="relative">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={5}
           centeredSlides
           loop
           speed={600}
@@ -64,20 +63,31 @@ const WhatWeOffer = () => {
             nextEl: ".swiper-next",
             prevEl: ".swiper-prev",
           }}
-          className="w-full py-16"
+          breakpoints={{
+            320: {
+              slidesPerView: 1.6,
+            },
+            640: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 5,
+            },
+          }}
+          className="w-full py-12 sm:py-16"
         >
           {services[activeCategory].map((item) => (
-            <SwiperSlide key={item.id} className="py-12">
+            <SwiperSlide key={item.id} className="py-10">
               {({ isActive, isPrev, isNext }) => {
                 let scale = "scale-90 opacity-60";
-                let size = "w-48 h-48";
+                let size = "w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48";
 
                 if (isActive) {
                   scale = "scale-110 opacity-100";
-                  size = "w-64 h-64";
+                  size = "w-52 h-52 sm:w-60 sm:h-60 lg:w-64 lg:h-64";
                 } else if (isPrev || isNext) {
                   scale = "scale-100 opacity-80";
-                  size = "w-56 h-56";
+                  size = "w-44 h-44 sm:w-52 sm:h-52 lg:w-56 lg:h-56";
                 }
 
                 return (
@@ -109,11 +119,11 @@ const WhatWeOffer = () => {
         </Swiper>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-center items-center gap-4">
-          <button className="swiper-prev w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
+        <div className="flex justify-center items-center gap-4 mt-4">
+          <button className="swiper-prev w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all cursor-pointer">
             <ChevronLeft />
           </button>
-          <button className="swiper-next w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
+          <button className="swiper-next w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all cursor-pointer">
             <ChevronRight />
           </button>
         </div>

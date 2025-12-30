@@ -25,7 +25,7 @@ const Milestones = () => {
       </div>
 
       {/* Timeline */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-4">
         {milestoneData.map((item, index) => (
           <div key={index} className="flex items-start gap-8 md:gap-12">
             <div className="flex flex-col items-center flex-shrink-0 mt-4">
