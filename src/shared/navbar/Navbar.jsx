@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { ImageProvider } from "@/components/common/ImageProvider";
+import { FaYoutube } from "react-icons/fa";
 
+import { AiFillInstagram } from "react-icons/ai";
+import logo from "../../assets/images/logo.png";
+import { FaFacebookF } from "react-icons/fa";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -12,7 +14,7 @@ const Navbar = () => {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Portfolio", href: "/portfolio" },
-    { name: "Case Studies", href: "/case-studies" },
+    // { name: "Case Studies", href: "/case-studies" },
     { name: "Contact", href: "/contact" },
   ];
  const [scrolled, setScrolled] = useState(false);
@@ -33,14 +35,14 @@ const Navbar = () => {
       className={`fixed  section-padding-x top-0 left-0 w-full z-50 transition-all duration-300
         ${
           scrolled
-            ? "bg-black/40 backdrop-blur-xl shadow-lg "
-            : "bg-black/40"
+            ? "bg-white/50 backdrop-blur-xl shadow-lg "
+            : "bg-transparent"
         }`}
     >
         <div className="px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-white text-2xl font-bold">
-            <img src={ImageProvider.logo} alt="" />
+            <img src={logo} alt="" className="w-32 sm:w-40" />
           </Link>
 
           {/* Desktop Nav */}
@@ -51,7 +53,7 @@ const Navbar = () => {
                   to={link.href}
                   end={link.href === "/"}
                   className={({ isActive }) =>
-                    `text-white transition ${
+                    `text-black transition ${
                       isActive
                         ? "font-semibold text-[17px] hover:opacity-80"
                         : "font-normal hover:opacity-80"
@@ -65,17 +67,29 @@ const Navbar = () => {
           </ul>
 
           {/* Social Icons (Desktop) */}
-          <div className="hidden md:flex items-center gap-4 text-white">
-            <div className="border border-white rounded-full  py-2 px-2.5 cursor-pointer hover:opacity-80">
-              <img src={ImageProvider.facebook} alt="facebook" />
-            </div>
-            <div className="border border-white rounded-full p-1.5 cursor-pointer hover:opacity-80">
-              <img src={ImageProvider.instagram} alt="instagram" />
-            </div>
-            <div className="border border-white rounded-full p-1.5 cursor-pointer hover:opacity-80">
-              <img src={ImageProvider.youtube} alt="youtube" />
-            </div>
-          </div>
+<div className="hidden md:flex items-center gap-4 text-black">
+  
+  <FaFacebookF
+    className="p-2 border rounded-full text-4xl cursor-pointer
+    transition-all duration-300
+    hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:scale-110"
+  />
+
+  <AiFillInstagram
+    className="p-2 border rounded-full text-4xl cursor-pointer
+    transition-all duration-300
+    hover:bg-gradient-to-r hover:from-pink-500 hover:via-red-500 hover:to-yellow-500
+    hover:text-white hover:border-transparent hover:scale-110"
+  />
+
+  <FaYoutube
+    className="p-2 border rounded-full text-4xl cursor-pointer
+    transition-all duration-300
+    hover:bg-red-600 hover:text-white hover:border-red-600 hover:scale-110"
+  />
+
+</div>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -95,13 +109,13 @@ const Navbar = () => {
       >
         <div className="px-6 py-6">
           {/* Logo */}
-          <Link
+          {/* <Link
             to="/"
             className="text-white text-2xl font-bold"
             onClick={() => setMenuOpen(false)}
           >
             LOGO
-          </Link>
+          </Link> */}
 
           {/* Nav Links */}
           <ul className="mt-8 flex flex-col gap-4">
@@ -126,7 +140,7 @@ const Navbar = () => {
           {/* Social Icons */}
           <div className="flex gap-5 mt-10 text-white">
             <FaFacebookF />
-            <FaInstagram />
+            <AiFillInstagram />
             <FaYoutube />
           </div>
         </div>

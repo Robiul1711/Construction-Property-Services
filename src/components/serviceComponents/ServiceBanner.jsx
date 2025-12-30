@@ -23,7 +23,8 @@ const data = [
 
 const ServiceBanner = () => {
   return (
-    <div className="section-padding-x section-padding-y mt-12">
+    <div className="section-padding-x section-padding-y mt-6">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-14 flex justify-end">Our services</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
         {data.map((item) => {
           // 2nd item → content bottom

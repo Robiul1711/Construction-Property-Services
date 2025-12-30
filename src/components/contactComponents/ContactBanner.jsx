@@ -31,7 +31,7 @@ const ContactBanner = () => {
         group-hover:translate-y-[-4px]"
       >
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-semibold
+          className="text-4xl md:text-6xl lg:text-7xl font-semibold text-center
           transition-transform duration-500
           group-hover:scale-105"
         >
