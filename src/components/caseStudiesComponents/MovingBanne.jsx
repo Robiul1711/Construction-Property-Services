@@ -5,7 +5,7 @@ const MovingBanner = () => {
   const repeatedText = Array(12).fill(text).join("");
 
   return (
-    <div className="w-full overflow-hidden font-sans font-bold uppercase tracking-wider text-sm pt-20 bg-[#494949]/40">
+    <div className="w-full overflow-hidden font-sans font-bold uppercase tracking-wider text-sm pt-18 bg-[#494949]/40">
       
       {/* Black Row */}
       <div className="bg-black text-white py-2 whitespace-nowrap">

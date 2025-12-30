@@ -1,3 +1,4 @@
+import ReadyProject from "@/components/home-components/ReadyProject";
 import ProjectBanner from "@/components/portfolioComponents/ProjectBanner";
 import ProjectShowcase from "@/components/portfolioComponents/ProjectShowcase";
 import React from "react";
@@ -7,6 +8,7 @@ const Portfolio = () => {
     <div>
 <ProjectBanner />
 <ProjectShowcase />
+<ReadyProject/>
     </div>
   );
 };
