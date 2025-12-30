@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaYoutube } from "react-icons/fa";
 
@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: "Contact", href: "/contact" },
   ];
  const [scrolled, setScrolled] = useState(false);
-
+const {pathname} = useLocation()
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -36,7 +36,9 @@ const Navbar = () => {
         ${
           scrolled
             ? "bg-white/50 backdrop-blur-xl shadow-lg "
-            : "bg-transparent"
+            : `bg-transparent ${pathname === "/about"  ? "bg-white/70 backdrop-blur-xl shadow-lg" : "" }
+            ${pathname === "/contact"  ? "bg-white/70 backdrop-blur-xl shadow-lg" : "" } 
+            `
         }`}
     >
         <div className="px-4 py-4 flex items-center justify-between">

@@ -90,7 +90,7 @@ const OurPortfolio = () => {
                     className="w-full h-full object-cover"
                   />
                   {!isActive && (
-                    <div className="absolute inset-0 bg-black/20 transition-opacity" />
+                    <div className="absolute " />
                   )}
                 </div>
               )}
