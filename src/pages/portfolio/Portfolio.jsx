@@ -1,9 +1,12 @@
+import ProjectBanner from "@/components/portfolioComponents/ProjectBanner";
+import ProjectShowcase from "@/components/portfolioComponents/ProjectShowcase";
 import React from "react";
 
 const Portfolio = () => {
   return (
     <div>
-      <p>Portfolio</p>
+<ProjectBanner />
+<ProjectShowcase />
     </div>
   );
 };
