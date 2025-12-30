@@ -113,7 +113,7 @@ const WhatWeOffer = () => {
           <button className="swiper-prev w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
             <ChevronLeft />
           </button>
-          <button className="swiper-prev w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
+          <button className="swiper-next w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#131313] hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
             <ChevronRight />
           </button>
         </div>
