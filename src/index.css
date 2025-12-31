@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 @import "tailwindcss";
 
 @import "tw-animate-css";
@@ -9,10 +9,12 @@
 @theme {
   /* font */
   --font-poppins: Poppins, sans-serif;
+  --font-marcellus: Marcellus, sans-serif;
+
 
   /* color */
 
-  --color-primary: green;
+  --color-theme-primary: #81b4e2;
   --color-bg-custom: linear-gradient(red, yellow);
 
   /* breakpoint */
@@ -178,10 +180,8 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   body {
+    font-family: var(--font-poppins);
     @apply bg-background text-foreground;
   }
 }
@@ -219,4 +219,21 @@
 
 .bg-custom {
   background: var(--color-bg-custom);
+}
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
+button{
+  cursor: pointer;
 }
