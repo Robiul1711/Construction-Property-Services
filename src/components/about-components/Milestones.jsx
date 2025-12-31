@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Milestones = () => {
   const milestoneData = [
@@ -9,10 +14,43 @@ const Milestones = () => {
     { year: "2023", text: "Celebrated 500+ completed projects" },
   ];
 
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const itemsRef = useRef([]);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    // Header animation
+    gsap.from(headerRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+
+    // Timeline items animation
+    gsap.from(itemsRef.current, {
+      y: 40,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%",
+      },
+    });
+  });
+
   return (
-    <section className="bg-white py-16 px-6 md:px-12 lg:px-24">
+    <section ref={sectionRef} className="bg-white py-16 px-6 md:px-12 lg:px-24">
       {/* Header Section */}
-      <div className="text-center mb-16">
+      <div ref={headerRef} className="text-center mb-16">
         <div className="flex items-center justify-center gap-2 mb-3">
           <span className="w-2.5 h-2.5 rounded-full bg-[#8EBAE3]"></span>
           <span className="text-[#8EBAE3] font-medium text-sm tracking-wide uppercase">
@@ -27,7 +65,11 @@ const Milestones = () => {
       {/* Timeline */}
       <div className="max-w-4xl mx-auto space-y-4">
         {milestoneData.map((item, index) => (
-          <div key={index} className="flex items-start gap-8 md:gap-12">
+          <div
+            key={index}
+            ref={(el) => (itemsRef.current[index] = el)}
+            className="flex items-start gap-8 md:gap-12"
+          >
             <div className="flex flex-col items-center flex-shrink-0 mt-4">
               <div className="w-[80px] h-[40px] bg-[#8EBAE3] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm">
                 {item.year}

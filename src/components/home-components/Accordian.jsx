@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaPlus } from "react-icons/fa6";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Accordian = () => {
   const accordingData = [
@@ -18,13 +23,11 @@ const Accordian = () => {
       description:
         "Contrast in graphic design emphasizes differences, making elements stand out and improving visual hierarchy.",
     },
-
     {
-      title: `4. How do you ensure projects are completed on time?`,
+      title: "4. How do you ensure projects are completed on time?",
       description:
         "Responsive design ensures web pages adapt to various screen sizes, providing an optimal user experience on different devices.",
     },
-
     {
       title: "5. Do you offer faster project options?",
       description:
@@ -34,16 +37,43 @@ const Accordian = () => {
 
   const [isPlusAccording, setIsPlusAccording] = useState(null);
 
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const itemsRef = useRef([]);
+
   const handleBorderClick = (index) =>
-    setIsPlusAccording((prevIndex) => (prevIndex === index ? null : index));
+    setIsPlusAccording((prev) => (prev === index ? null : index));
+
+  // 🔥 Scroll reveal animation
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    gsap.from([titleRef.current, itemsRef.current], {
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+  });
+
   return (
-    <div className="section-padding-x py-6 lg:py-12">
-      <h2 className="text-4xl lg:text-5xl font-medium mb-4 text-center ">
+    <div ref={sectionRef} className="section-padding-x py-6 lg:py-12">
+      <h2
+        ref={titleRef}
+        className="text-4xl lg:text-5xl font-medium mb-4 text-center"
+      >
         Frequently Asked Questions
       </h2>
+
       <div className="flex gap-3 flex-col max-w-5xl mx-auto py-10">
-        {accordingData?.map((according, index) => (
+        {accordingData.map((according, index) => (
           <article
+            ref={(el) => (itemsRef.current[index] = el)}
             key={index}
             className="border dark:border-slate-700 border-[#e5eaf2] rounded p-3"
           >
@@ -54,15 +84,13 @@ const Accordian = () => {
               <h2 className="text-[#131313] font-[500] text-[1.1rem] lg:text-[1.3rem]">
                 {according.title}
               </h2>
-              <p>
-                <FaPlus
-                  className={`text-[1rem] lg:text-[1.3rem] dark:text-slate-600 text-text transition-all duration-300 ${
-                    isPlusAccording === index &&
-                    "rotate-[45deg] !text-[#131313]"
-                  }`}
-                />
-              </p>
+              <FaPlus
+                className={`text-[1rem] lg:text-[1.3rem] transition-all duration-300 ${
+                  isPlusAccording === index && "rotate-[45deg] !text-[#131313]"
+                }`}
+              />
             </div>
+
             <div
               className={`grid transition-all duration-300 overflow-hidden ease-in-out ${
                 isPlusAccording === index
@@ -70,7 +98,7 @@ const Accordian = () => {
                   : "grid-rows-[0fr] opacity-0"
               }`}
             >
-              <p className="text-[#424242] dark:text-[#abc2d3] text-[0.9rem] overflow-hidden">
+              <p className="text-[#424242] text-[0.9rem] overflow-hidden">
                 {according.description}
               </p>
             </div>

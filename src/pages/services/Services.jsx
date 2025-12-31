@@ -3,15 +3,17 @@ import Construction from "@/components/serviceComponents/Construction";
 import QualityAndCare from "@/components/serviceComponents/QualityAndCare";
 import ServiceBanner from "@/components/serviceComponents/ServiceBanner";
 import React from "react";
+import { ScrollRestoration } from "react-router-dom";
 
 const Services = () => {
   return (
-    <div>
+    <>
+      <ScrollRestoration />
       <ServiceBanner />
-     <Construction />
-     <QualityAndCare />
-     <ReadyProject />
-    </div>
+      <Construction />
+      <QualityAndCare />
+      <ReadyProject />
+    </>
   );
 };
 

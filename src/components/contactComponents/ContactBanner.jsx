@@ -10,7 +10,7 @@ const ContactBanner = () => {
       <img
         src={banner}
         alt="Contact Banner"
-        className="w-full h-[580px] object-cover 
+        className="w-full h-[680px] object-cover 
         transition-transform duration-700 ease-out 
         group-hover:scale-110"
       />
@@ -43,8 +43,8 @@ const ContactBanner = () => {
           transition-opacity duration-500
           group-hover:opacity-100"
         >
-          Ready to transform your property? Get in touch for a free
-          consultation and let's discuss how we can help.
+          Ready to transform your property? Get in touch for a free consultation
+          and let's discuss how we can help.
         </p>
 
         {/* Breadcrumb */}
