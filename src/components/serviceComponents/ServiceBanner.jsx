@@ -24,44 +24,72 @@ const data = [
 const ServiceBanner = () => {
   return (
     <div className="section-padding-x section-padding-y mt-6">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-14 flex justify-end">Our services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      {/* Heading */}
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-10 md:mb-14 text-center md:text-right">
+        Our services
+      </h1>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
         {data.map((item) => {
-          // 2nd item → content bottom
+          // 2nd item → image top, content bottom
           if (item.id === 2) {
             return (
-              <div key={item.id} className="flex flex-col gap-6">
-                <img src={item.image} alt={item.title} />
+              <div
+                key={item.id}
+                className="flex flex-col gap-6 items-center md:items-start text-center md:text-left"
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full max-w-xs md:max-w-full mx-auto"
+                />
 
                 <div>
-                  <h1 className="text-3xl font-semibold">{item.title}</h1>
-                  <p className="mt-4 text-gray-600">{item.desc}</p>
+                  <h1 className="text-2xl md:text-3xl font-semibold">
+                    {item.title}
+                  </h1>
+                  <p className="mt-4 text-gray-600 text-sm md:text-base">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             );
           }
 
-          // 4th item → content top
+          // 4th item → content top, image bottom
           if (item.id === 4) {
             return (
-              <div key={item.id} className="flex flex-col gap-6">
+              <div
+                key={item.id}
+                className="flex flex-col gap-6 items-center md:items-start text-center md:text-left"
+              >
                 <div>
-                  <h1 className="text-3xl font-semibold">{item.title}</h1>
-                  <p className="mt-4 text-gray-600">{item.desc}</p>
+                  <h1 className="text-2xl md:text-3xl font-semibold">
+                    {item.title}
+                  </h1>
+                  <p className="mt-4 text-gray-600 text-sm md:text-base">
+                    {item.desc}
+                  </p>
                 </div>
 
-                <img src={item.image} alt={item.title} />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full max-w-xs md:max-w-full mx-auto"
+                />
               </div>
             );
           }
 
-          // Default (1st & 3rd)
+          // 1st & 3rd → image only
           return (
-            <div
-              key={item.id}
-              className="flex items-center justify-center"
-            >
-              <img src={item.image} alt="service" />
+            <div key={item.id} className="flex items-center justify-center">
+              <img
+                src={item.image}
+                alt="service"
+                className="w-full max-w-xs md:max-w-full mx-auto"
+              />
             </div>
           );
         })}

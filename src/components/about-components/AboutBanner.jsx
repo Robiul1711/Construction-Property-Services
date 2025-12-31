@@ -43,7 +43,7 @@ const AboutBanner = () => {
       >
         <h1
           className="
-            text-2xl sm:text-3xl md:text-5xl lg:text-7xl
+            text-2xl sm:text-3xl md:text-5xl lg:text-7xl max-w-6xl
             font-semibold
             text-center
             leading-tight

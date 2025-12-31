@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ImageProvider } from "../common/ImageProvider";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ReadyProject = () => {
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const birdRef = useRef(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    // Content animation
+    gsap.from(contentRef.current, {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+
+    // Bird animation (desktop only)
+    if (birdRef.current) {
+      gsap.from(birdRef.current, {
+        y: -20,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+    }
+  });
+
   return (
-    <div className="section-padding-x relative min-h-[70vh] sm:min-h-screen w-full overflow-hidden bg-gradient-to-b from-transparent to-[#cad7e4] -mb-10 -z-30">
+    <div
+      ref={sectionRef}
+      className="section-padding-x relative min-h-[70vh] sm:min-h-screen w-full overflow-hidden bg-gradient-to-b from-transparent to-[#cad7e4] -mb-10 -z-30"
+    >
       <div>
         {/* Background Image */}
         <img
@@ -12,14 +55,17 @@ const ReadyProject = () => {
           alt="banner"
         />
 
-        {/* Bird Image (hidden on small screens only) */}
-        <div className="absolute top-6 right-4 sm:right-6 lg:right-10 hidden lg:block">
+        {/* Bird Image */}
+        <div
+          ref={birdRef}
+          className="absolute top-6 right-4 sm:right-6 lg:right-10 hidden lg:block"
+        >
           <img src={ImageProvider.bird} alt="bird" />
         </div>
 
         {/* Content Overlay */}
         <div className="relative z-10 flex mt-6">
-          <div className="px-4 sm:px-6 lg:px-8">
+          <div ref={contentRef} className="px-4 sm:px-6 lg:px-8">
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-medium my-4">
               Ready to Start Your Project?
             </h1>
@@ -31,7 +77,6 @@ const ReadyProject = () => {
               reality.
             </p>
 
-            {/* CTA Button */}
             <button className="bg-[#131313] text-white px-8 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-gray-600 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
               Contact Us
             </button>

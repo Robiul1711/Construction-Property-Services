@@ -1,22 +1,48 @@
 import React from "react";
 import { ImageProvider } from "../common/ImageProvider";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const HomeBanner = () => {
+  const sectionRef = React.useRef(null);
+  const titleRef = React.useRef(null);
+  const subtitleRef = React.useRef(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    gsap.from([titleRef.current, subtitleRef.current], {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  });
   return (
-    <div className="section-padding-x section-padding-y  relative min-h-screen w-full overflow-hidden bg-[#5895ca]">
+    <div
+      ref={sectionRef}
+      className="section-padding-x section-padding-y  relative group  min-h-screen w-full overflow-hidden bg-[#5895ca]"
+    >
       {/* Background Image */}
       <img
-        className="absolute inset-0 w-full h-full object-cover top-22"
+        className="absolute inset-0 w-full h-full object-cover top-22 group-hover:scale-105 transition-all duration-500 ease-in-out"
         src={ImageProvider.homeBanner}
         alt="banner"
       />
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium text-white leading-tight max-w-5xl text-center mx-auto my-6 lg:my-8 pt-8 lg:pt-0">
+      <h1 className="group-hover:scale-105 transition-all duration-500 ease-in-out text-3xl md:text-4xl lg:text-6xl font-medium text-white leading-tight max-w-5xl text-center mx-auto my-6 lg:my-8 pt-12 lg:pt-0">
         Building Better Spaces, From Concept to Completion
       </h1>
 
       {/* Content Overlay */}
       <div className="relative z-10 flex mt-6">
-        <div className="px-4 sm:px-6 lg:px-8">
+        <div ref={titleRef} className="px-4 sm:px-6 lg:px-8">
           <p className="lg:text-lg text-white mb-6 mt-6 leading-relaxed max-w-lg">
             We believe every space has the potential to inspire. From the
             initial concept to the final touches, we bring your vision to life
