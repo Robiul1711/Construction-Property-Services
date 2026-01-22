@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useApiMutation } from "@/hooks/apiMutation";
 
 // 1. Define the Validation Schema
 const contactSchema = z.object({
@@ -26,12 +27,17 @@ const ContactForm = () => {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data) => {
-    // Simulate API Call
-    console.log("Form Data:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert("Message sent successfully!");
-    reset();
+
+
+
+const { mutate, isPending } = useApiMutation({
+  url: "/message/submit",
+  method: "POST",
+
+});
+
+  const onSubmit = (data) => {
+    mutate(data);
   };
 
   return (

@@ -3,10 +3,18 @@ import { FaPlus } from "react-icons/fa6";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useApiQuery } from "@/hooks/apiQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Accordian = () => {
+
+  const { data, isLoading } = useApiQuery({
+    queryKey: ["faqs-data"], // Just the base key
+    url: "/faqs-data",
+  
+  });
+  console.log(data?.data);
   const accordingData = [
     {
       title: "1. How long does a typical renovation project take?",
@@ -71,7 +79,7 @@ const Accordian = () => {
       </h2>
 
       <div className="flex gap-3 flex-col max-w-5xl mx-auto py-10">
-        {accordingData.map((according, index) => (
+        {data?.data?.map((according, index) => (
           <article
             ref={(el) => (itemsRef.current[index] = el)}
             key={index}
@@ -82,7 +90,7 @@ const Accordian = () => {
               onClick={() => handleBorderClick(index)}
             >
               <h2 className="text-[#131313] font-[500] text-[1.1rem] lg:text-[1.3rem]">
-                {according.title}
+                {according.question}
               </h2>
               <FaPlus
                 className={`text-[1rem] lg:text-[1.3rem] transition-all duration-300 ${
@@ -99,7 +107,7 @@ const Accordian = () => {
               }`}
             >
               <p className="text-[#424242] text-[0.9rem] overflow-hidden">
-                {according.description}
+                {according.answer}
               </p>
             </div>
           </article>

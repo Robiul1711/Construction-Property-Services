@@ -2,17 +2,18 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useApiQuery } from "@/hooks/apiQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Milestones = () => {
-  const milestoneData = [
-    { year: "2005", text: "Prime Property founded in New York City" },
-    { year: "2010", text: "Expanded to commercial property management" },
-    { year: "2015", text: "Launched construction and renovation division" },
-    { year: "2018", text: "Reached $100M in managed property value" },
-    { year: "2023", text: "Celebrated 500+ completed projects" },
-  ];
+  
+const { data, isLoading } = useApiQuery({
+  queryKey: ["about-journey"], // Just the base key
+  url: "/about-journey",
+
+});
+
 
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
@@ -64,7 +65,7 @@ const Milestones = () => {
 
       {/* Timeline */}
       <div className="max-w-4xl mx-auto space-y-4">
-        {milestoneData.map((item, index) => (
+        {data?.data?.map((item, index) => (
           <div
             key={index}
             ref={(el) => (itemsRef.current[index] = el)}
@@ -74,7 +75,7 @@ const Milestones = () => {
               <div className="w-[80px] h-[40px] bg-[#8EBAE3] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm">
                 {item.year}
               </div>
-              {index !== milestoneData.length - 1 && (
+              {index !== data?.data?.length - 1 && (
                 <span className="w-[2px] h-12 bg-gray-200 mt-4"></span>
               )}
             </div>
@@ -83,7 +84,7 @@ const Milestones = () => {
             <div className="flex-grow">
               <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <p className="text-gray-500 text-base md:text-lg">
-                  {item.text}
+                  {item.title}
                 </p>
               </div>
             </div>

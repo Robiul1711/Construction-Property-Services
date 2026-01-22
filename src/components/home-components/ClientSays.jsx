@@ -4,10 +4,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useApiQuery } from "@/hooks/apiQuery";
+import { IMG_URL } from "@/config/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ClientSays = () => {
+
+  const { data, isLoading } = useApiQuery({
+    queryKey: ["testimonials-data"], // Just the base key
+    url: "/testimonials-data",
+  
+  });
+  // console.log(data?.data);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const sectionRef = useRef(null);
@@ -15,43 +24,13 @@ const ClientSays = () => {
   const contentRef = useRef(null);
   const imageRef = useRef(null);
 
-  const testimonials = [
-    {
-      id: 1,
-      text: "The team was professional, efficient, and paid attention to every detail. From planning to execution, everything was smooth and stress-free. Highly recommended!",
-      name: "Kabir Nishat",
-      position: "Senior VP, Sales and Service, Blue Nile",
-      image: ImageProvider.client,
-    },
-    {
-      id: 2,
-      text: "Outstanding service from start to finish. The attention to detail and commitment to quality exceeded our expectations. We couldn't be happier with the results!",
-      name: "Sarah Johnson",
-      position: "CEO, TechStart Innovations",
-      image: ImageProvider.client1,
-    },
-    {
-      id: 3,
-      text: "Exceptional work ethic and professionalism. They delivered on time and within budget while maintaining the highest standards. I would highly recommend their services!",
-      name: "Michael Chen",
-      position: "Director of Operations, BuildRight Co.",
-      image: ImageProvider.client2,
-    },
-    {
-      id: 4,
-      text: "Outstanding service from start to finish. The attention to detail and commitment to quality exceeded our expectations. We couldn't be happier with the results!",
-      name: "Sarah Johnson",
-      position: "CEO, TechStart Innovations",
-      image: ImageProvider.client3,
-    },
-  ];
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+    setActiveIndex((prev) => (prev === 0 ? data?.data?.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev === data?.data?.length - 1 ? 0 : prev + 1));
   };
 
   // 🔥 Scroll animation for header
@@ -102,14 +81,14 @@ const ClientSays = () => {
 
       {/* Testimonial Card */}
       <div className="relative">
-        <div className="bg-[#F9F9F9] rounded-2xl p-8 md:p-12 lg:p-16">
-          <div className="items-center flex flex-col md:flex-row gap-6">
+        <div className="bg-[#F9F9F9] rounded-2xl p-4 sm:p-8 md:p-12 lg:p-16">
+          <div className="items-center flex flex-col md:flex-row gap-6 justify-between">
             {/* Left Side */}
             <div className="relative">
               {/* Progress Bar */}
               <div className="absolute left-0 top-0 bottom-0 w-2 hidden md:flex items-center">
                 <div className="flex flex-col gap-4">
-                  {testimonials.map((_, index) => (
+                  {data?.data?.map((_, index) => (
                     <span
                       key={index}
                       className={`w-2 h-12 rounded-full transition-all duration-300 ${
@@ -122,16 +101,19 @@ const ClientSays = () => {
 
               {/* Content */}
               <div ref={contentRef} className="md:pl-8 lg:pl-12">
+                {data?.data?.title &&
+                  
                 <p className="sm:text-lg md:text-xl lg:text-2xl text-gray-900 font-medium mb-8 leading-relaxed max-w-5xl mx-auto">
-                  {testimonials[activeIndex].text}
+                  { data?.data?.[activeIndex].title}
                 </p>
+                }
 
                 <div className="mb-8">
                   <h4 className="text-xl font-semibold text-gray-900 mb-1">
-                    {testimonials[activeIndex].name}
+                    {data?.data?.[activeIndex].name}
                   </h4>
                   <p className="text-sm text-gray-500">
-                    {testimonials[activeIndex].position}
+                    {data?.data?.[activeIndex].designation}
                   </p>
                 </div>
 
@@ -154,7 +136,7 @@ const ClientSays = () => {
 
               {/* Mobile Dots */}
               <div className="flex gap-2 mt-6 md:hidden justify-center">
-                {testimonials.map((_, index) => (
+                {data?.data?.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveIndex(index)}
@@ -171,8 +153,8 @@ const ClientSays = () => {
               <div className="relative w-full rounded-xl overflow-hidden bg-gray-200">
                 <img
                   ref={imageRef}
-                  src={testimonials[activeIndex].image}
-                  alt={testimonials[activeIndex].name}
+                  src={IMG_URL + data?.data?.[activeIndex].image}
+                  alt={data?.data?.[activeIndex].name}
                   className="w-full h-[350px] object-cover"
                 />
               </div>

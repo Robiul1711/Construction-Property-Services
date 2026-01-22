@@ -23,7 +23,7 @@ const data = [
 
 const ServiceBanner = () => {
   return (
-    <div className="section-padding-x section-padding-y mt-6">
+    <div className="section-padding-x section-padding-y mt-10 sm:mt-6">
       {/* Heading */}
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-10 md:mb-14 text-center md:text-right">
         Our services

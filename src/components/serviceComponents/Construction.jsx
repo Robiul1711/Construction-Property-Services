@@ -68,7 +68,7 @@ const Construction = () => {
 
   return (
     <div className="section-padding-x ">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-12">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-12">
         Construction & Property Services
       </h1>
       <HoverExpand_001 images={images} />
@@ -79,7 +79,15 @@ const Construction = () => {
 export default Construction;
 
 const HoverExpand_001 = ({ images, className }) => {
-  const [activeImage, setActiveImage] = useState(1);
+  const [activeImage, setActiveImage] = useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <motion.div
@@ -94,19 +102,35 @@ const HoverExpand_001 = ({ images, className }) => {
         transition={{ duration: 0.3 }}
         className="w-full"
       >
-        <div className="flex w-full items-center  gap-3">
+        <div
+          className={cn(
+            "flex w-full gap-3",
+            isMobile ? "flex-col" : "flex-row items-center",
+          )}
+        >
           {images.map((image, index) => (
             <motion.div
               key={index}
               className="relative cursor-pointer overflow-hidden rounded-3xl group"
-              initial={{ width: "2.5rem", height: "20rem" }}
-              animate={{
-                width: activeImage === index ? "50rem" : "10rem",
-                height: "24rem",
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              initial={
+                isMobile
+                  ? { height: "4rem", width: "100%" }
+                  : { width: "10rem", height: "24rem" }
+              }
+              animate={
+                isMobile
+                  ? {
+                      height: activeImage === index ? "22rem" : "4rem",
+                      width: "100%",
+                    }
+                  : {
+                      width: activeImage === index ? "45rem" : "12rem",
+                      height: "30rem",
+                    }
+              }
+              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
               onClick={() => setActiveImage(index)}
-              onHoverStart={() => setActiveImage(index)}
+              onHoverStart={() => !isMobile && setActiveImage(index)}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               <AnimatePresence>
@@ -148,9 +172,17 @@ const HoverExpand_001 = ({ images, className }) => {
                 alt={image.alt}
                 className="size-full object-cover"
               />
-              <div className="p-2 rounded-full bg-white absolute -bottom-2 -right-2 flex items-center justify-center ">
-                <div className="w-[50px] h-[50px] bg-black group-hover:bg-theme-primary group-hover:text-black duration-300 text-white rounded-full  flex items-center justify-center">
-                  <FaArrowRightLong className="text-2xl" />
+
+              <div
+                className={cn(
+                  "p-2 rounded-full bg-white absolute flex items-center justify-center duration-300",
+                  isMobile
+                    ? "bottom-2 right-2 scale-75"
+                    : "-bottom-2 -right-2 group-hover:bottom-2 group-hover:right-2",
+                )}
+              >
+                <div className="w-[45px] h-[45px] sm:w-[50px] sm:h-[50px] bg-black group-hover:bg-theme-primary group-hover:text-black duration-300 text-white rounded-full flex items-center justify-center">
+                  <FaArrowRightLong className="text-xl sm:text-2xl" />
                 </div>
               </div>
             </motion.div>
@@ -158,11 +190,7 @@ const HoverExpand_001 = ({ images, className }) => {
         </div>
       </motion.div>
 
-      <div
-        className="flex flex-col sm:flex-ro items-center justify-between gap-4 bg-[#E3F1FF] rounded-2xl sm:rounded-full px-4 sm:px-6 py-4 sm:py-3
-    mt-12
-  "
-      >
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#E3F1FF] rounded-2xl sm:rounded-full px-4 sm:px-6 py-4 sm:py-3 mt-12">
         {/* Left: Avatars + Text */}
         <div className="flex items-center gap-3">
           {/* Avatars */}

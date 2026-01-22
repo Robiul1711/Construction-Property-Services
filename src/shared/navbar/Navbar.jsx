@@ -49,7 +49,7 @@ const Navbar = () => {
             `
         }`}
       >
-        <div className="px-4 py-4 flex items-center justify-between">
+        <div className=" py-4 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-white text-2xl font-bold">
             <img src={logo} alt="" className="w-32 sm:w-40" />
@@ -94,7 +94,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-16 left-0 h-screen w-[280px] bg-[#81B4E2] z-40 transform transition-transform duration-300 ${
+        className={`fixed top-15 left-0 h-screen w-[280px] bg-white/70 backdrop-blur-xl z-40 transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
@@ -117,7 +117,7 @@ const Navbar = () => {
                   end={link.href === "/"}
                   onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
-                    `text-white text-lg transition ${
+                    ` text-lg transition ${
                       isActive ? "font-semibold" : "font-normal"
                     }`
                   }

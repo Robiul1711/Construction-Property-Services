@@ -90,7 +90,7 @@ const OurPortfolio = () => {
                     className="w-full h-full object-cover"
                   />
                   {!isActive && (
-                    <div className="absolute " />
+                    <div className="absolute" />
                   )}
                 </div>
               )}

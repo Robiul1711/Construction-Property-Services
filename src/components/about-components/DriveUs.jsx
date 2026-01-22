@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import "swiper/css";
+import { useApiQuery } from "@/hooks/apiQuery";
 
 const values = [
   {
@@ -46,6 +47,12 @@ const values = [
 ];
 
 const DrivesUs = () => {
+  const { data, isLoading } = useApiQuery({
+    queryKey: ["about-value"], // Just the base key
+    url: "/about-value",
+  
+  });
+  console.log(data?.data);
   return (
     <section className="section-padding-x py-16 bg-white">
       {/* Header */}
@@ -80,15 +87,15 @@ const DrivesUs = () => {
         }}
         className="pb-4"
       >
-        {values.map((item, index) => {
+        {data?.data?.map((item, index) => {
           const Icon = item.icon;
           return (
             <SwiperSlide key={index} className="py-4">
               <div className="h-full bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
                 {/* Icon */}
-                <div className="w-10 h-10 rounded-lg bg-theme-primary flex items-center justify-center mb-6">
+                {/* <div className="w-10 h-10 rounded-lg bg-theme-primary flex items-center justify-center mb-6">
                   <Icon className="w-5 h-5 text-white" />
-                </div>
+                </div> */}
 
                 {/* Title */}
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
@@ -97,7 +104,7 @@ const DrivesUs = () => {
 
                 {/* Description */}
                 <p className="text-sm text-gray-500 leading-relaxed">
-                  {item.desc}
+                  {item.content}
                 </p>
               </div>
             </SwiperSlide>

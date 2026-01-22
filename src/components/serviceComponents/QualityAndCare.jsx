@@ -26,7 +26,7 @@ const QualityAndCare = () => {
           <div className="max-w-[1000px]">
             <h1
               className="
-                text-xl
+                text-lg
                 sm:text-2xl
                 md:text-4xl
                 lg:text-5xl
