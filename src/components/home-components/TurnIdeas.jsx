@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TurnIdeas = () => {
+const TurnIdeas = ({ data }) => {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const stepsRef = useRef([]);
@@ -69,12 +69,10 @@ const TurnIdeas = () => {
       {/* Header Section */}
       <div ref={headerRef} className="mb-16 md:mb-24 max-w-lg relative z-10">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-6">
-          How We Turn Ideas Into Results
+          {data?.idea_into_title}
         </h2>
         <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-          We follow a structured process to turn your ideas into high-quality
-          results, ensuring transparency, efficiency, and attention to detail
-          from consultation to final delivery.
+          {data?.idea_into_subtitle}
         </p>
       </div>
 
@@ -85,10 +83,9 @@ const TurnIdeas = () => {
           ref={(el) => (stepsRef.current[0] = el)}
           className="relative lg:absolute lg:-top-60 lg:right-0 max-w-md mb-10 lg:mb-0"
         >
-          <h3 className="text-2xl md:text-3xl font-semibold">Planning</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold">{data?.idea_1_title}</h3>
           <p className="text-gray-400 text-sm md:text-base leading-relaxed mt-3">
-            We carefully plan every detail from design and budgeting to
-            timelines ensuring a smooth and efficient project execution.
+       {data?.idea_1_content || "We collaborate closely to understand your vision, needs, and budget, ensuring every detail is tailored to your lifestyle."}
           </p>
         </div>
 
@@ -97,10 +94,9 @@ const TurnIdeas = () => {
           ref={(el) => (stepsRef.current[1] = el)}
           className="relative lg:absolute space-y-4 lg:-top-24 lg:left-[40%] max-w-md mb-10 lg:mb-0"
         >
-          <h3 className="text-2xl md:text-3xl font-semibold">Estimating</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold">{data?.idea_2_title}</h3>
           <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-            We provide accurate cost estimates and clear budgeting to help you
-            plan confidently with no hidden surprises.
+          {data?.idea_2_content || "We provide transparent and detailed estimates, ensuring you have a clear understanding of costs and timelines before construction begins."}
           </p>
         </div>
 
@@ -109,10 +105,9 @@ const TurnIdeas = () => {
           ref={(el) => (stepsRef.current[2] = el)}
           className="relative lg:absolute space-y-4 lg:-bottom-24 max-w-md"
         >
-          <h3 className="text-2xl md:text-3xl font-semibold">Building</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold">{data?.idea_3_title}</h3>
           <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-            We bring plans to life with skilled construction, quality materials,
-            and careful attention to every detail.
+          {data?.idea_3_content || "Our skilled craftsmen bring your vision to life with meticulous attention to detail, ensuring quality and excellence in every aspect of construction."}
           </p>
         </div>
       </div>

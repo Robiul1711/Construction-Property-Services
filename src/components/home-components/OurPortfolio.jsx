@@ -7,30 +7,26 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import { ImageProvider } from "../common/ImageProvider";
+import { useApiQuery } from "@/hooks/apiQuery";
+import { IMG_URL } from "@/config/constant";
 
-const OurPortfolio = () => {
-  const slides = [
-    { id: 1, img: ImageProvider.portfolio },
-    { id: 2, img: ImageProvider.portfolio1 },
-    { id: 3, img: ImageProvider.portfolio2 },
-    { id: 4, img: ImageProvider.portfolio3 },
-    { id: 5, img: ImageProvider.portfolio4 },
-    { id: 6, img: ImageProvider.portfolio5 },
-  ];
+const OurPortfolio = ({ data }) => {
+      const { data: portfolioData, isLoading } = useApiQuery({
+        queryKey: ["portfolio-data"], // Just the base key
+        url: "/portfolio-data",
+      
+      });
 
-  const safeSlides = [...slides, ...slides];
 
   return (
     <section className="section-padding-x py-12 lg:py-20 bg-white overflow-hidden">
       {/* Header Section */}
       <div className="text-center mb-12">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 mb-4 tracking-tight">
-          Our Portfolio
+       {data?.portfolio_title}
         </h2>
         <p className="max-w-4xl mx-auto text-center text-gray-500 lg:text-lg">
-          Explore our portfolio to see the projects we’ve transformed. From
-          renovation and construction to property management, we deliver
-          quality, creativity, and excellence in every space.
+       {data?.portfolio_content}
         </p>
       </div>
 
@@ -70,7 +66,7 @@ const OurPortfolio = () => {
           }}
           className="!pt-10 !pb-24"
         >
-          {safeSlides.map((slide, index) => (
+          {portfolioData?.data?.map((slide, index) => (
             <SwiperSlide
               key={`${slide.id}-${index}`}
               className="transition-all duration-500 py-6"
@@ -85,7 +81,7 @@ const OurPortfolio = () => {
                   `}
                 >
                   <img
-                    src={slide.img}
+                    src={IMG_URL + slide.cover_image}
                     alt="Portfolio Project"
                     className="w-full h-full object-cover"
                   />

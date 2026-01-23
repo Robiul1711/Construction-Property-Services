@@ -4,10 +4,11 @@ import AiAssistantCard from "../common/AiAssistantCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { IMG_URL } from "@/config/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ModernResidential = () => {
+const ModernResidential = ({ data }) => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
@@ -44,7 +45,7 @@ const ModernResidential = () => {
         <div className="w-full">
           <div className="rounded-3xl overflow-hidden shadow-lg relative">
             <img
-              src={ImageProvider.modern}
+              src={IMG_URL + data?.about_image || ImageProvider.modern}
               alt="Modern residential interior"
               className="w-full h-auto object-cover hover:scale-105 transition-all duration-500 ease-in-out"
             />
@@ -58,7 +59,7 @@ const ModernResidential = () => {
             ref={titleRef}
             className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight"
           >
-            Shaping Modern Residential & Commercial Spaces
+           {data?.about_title}
           </h2>
 
           {/* Description */}
@@ -66,17 +67,14 @@ const ModernResidential = () => {
             ref={descRef}
             className="text-sm sm:text-base text-gray-600 leading-relaxed"
           >
-            We design modern residential and commercial spaces with a focus on
-            quality, functionality, and detail. From planning to execution, we
-            turn ideas into well-crafted environments that enhance both living
-            and working experiences.
+    {data?.about_content}
           </p>
 
           {/* Statistics */}
           <div ref={statsRef} className="grid grid-cols-3 gap-4 sm:gap-6 pt-4">
             <div>
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900">
-                340+
+                {data?.about_project || 0}+
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">
                 Successful Projects
@@ -85,7 +83,7 @@ const ModernResidential = () => {
 
             <div>
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900">
-                64+
+                {data?.about_member || 0}+
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">
                 Team Members
@@ -94,7 +92,7 @@ const ModernResidential = () => {
 
             <div>
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900">
-                80+
+                {data?.about_happy_client || 0}+
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">
                 Happy Client

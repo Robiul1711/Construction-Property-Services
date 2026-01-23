@@ -12,6 +12,7 @@ import {
 
 import "swiper/css";
 import { useApiQuery } from "@/hooks/apiQuery";
+import { IMG_URL } from "@/config/constant";
 
 const values = [
   {
@@ -88,25 +89,32 @@ const DrivesUs = () => {
         className="pb-4"
       >
         {data?.data?.map((item, index) => {
-          const Icon = item.icon;
+          // const Icon = item.icon;
           return (
             <SwiperSlide key={index} className="py-4">
-              <div className="h-full bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
-                {/* Icon */}
-                {/* <div className="w-10 h-10 rounded-lg bg-theme-primary flex items-center justify-center mb-6">
-                  <Icon className="w-5 h-5 text-white" />
-                </div> */}
+<div className="h-full bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+  <div className="w-full mx-auto flex justify-center">
 
-                {/* Title */}
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  {item.title}
-                </h3>
+  {/* Icon Container - Fixed for Perfect Centering */}
+  <div className="w-12 h-12 bg-[#8EBAE3] rounded-lg flex items-center justify-center mb-6 overflow-hidden">
+    <img 
+      src={IMG_URL + item.image} 
+      alt={item.title} 
+      className="max-w-[70%] max-h-[70%] object-contain block mx-auto group-hover:scale-110 transition-transform duration-300" 
+    />
+  </div>
+  </div>
 
-                {/* Description */}
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {item.content}
-                </p>
-              </div>
+  {/* Title */}
+  <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center">
+    {item.title}
+  </h3>
+
+  {/* Description */}
+  <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 text-center">
+    {item.content}
+  </p>
+</div>
             </SwiperSlide>
           );
         })}

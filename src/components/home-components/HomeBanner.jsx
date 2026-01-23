@@ -2,8 +2,10 @@ import React from "react";
 import { ImageProvider } from "../common/ImageProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useApiQuery } from "@/hooks/apiQuery";
+import { IMG_URL } from "@/config/constant";
 
-const HomeBanner = () => {
+const HomeBanner = ({ data }) => {
   const sectionRef = React.useRef(null);
   const titleRef = React.useRef(null);
   const subtitleRef = React.useRef(null);
@@ -33,20 +35,18 @@ const HomeBanner = () => {
       {/* Background Image */}
       <img
         className="absolute inset-0 w-full h-full object-cover top-22 group-hover:scale-105 transition-all duration-500 ease-in-out"
-        src={ImageProvider.homeBanner}
+        src={IMG_URL + data?.cover_image || ImageProvider.homeBanner}
         alt="banner"
       />
       <h1 className="group-hover:scale-105 transition-all duration-500 ease-in-out text-3xl md:text-4xl lg:text-6xl font-medium text-white leading-tight max-w-5xl text-center mx-auto my-6 lg:my-8 pt-12 lg:pt-0">
-        Building Better Spaces, From Concept to Completion
+        {data?.title}
       </h1>
 
       {/* Content Overlay */}
       <div className="relative z-10 flex mt-6">
         <div ref={titleRef} className="px-4 sm:px-6 lg:px-8">
           <p className="lg:text-lg text-white mb-6 mt-6 leading-relaxed max-w-lg">
-            We believe every space has the potential to inspire. From the
-            initial concept to the final touches, we bring your vision to life
-            with precision, creativity, and care.
+          {data?.sub_title}
           </p>
 
           {/* CTA Button */}

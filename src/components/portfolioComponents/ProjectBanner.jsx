@@ -10,15 +10,10 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
+import { IMG_URL } from "@/config/constant";
 
-const ProjectBanner = () => {
+const ProjectBanner = ({ data }) => {
   const swiperRef = useRef(null);
-
-  const sliderData = [
-    { id: 1, title: "Kings Down", img: mainImg, type: "Luxury Villa" },
-    { id: 2, title: "Ocean View", img: leftImg, type: "Beachfront Mall" },
-    { id: 3, title: "Modern Loft", img: rightImg, type: "Urban Living" },
-  ];
 
   return (
     <section className="section-padding-x mt-20 md:mt-32 lg:mt-40">
@@ -68,13 +63,13 @@ const ProjectBanner = () => {
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             className="w-full h-full"
           >
-            {sliderData.map((item) => (
+            {data?.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className="relative w-full h-full">
                   <img
-                    src={item.img}
+                    src={IMG_URL + item.cover_image}
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-[400px] md:h-[500px] object-cover"
                   />
                   {/* Glassmorphism Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -82,7 +77,7 @@ const ProjectBanner = () => {
                   {/* Floating Content */}
                   <div className="absolute top-8 left-8 md:top-12 md:left-12">
                     <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest mb-3 border border-white/20">
-                      {item.type}
+                      {item.location}
                     </span>
                     <h3 className="text-white text-4xl md:text-5xl lg:text-6xl font-black tracking-tight drop-shadow-lg">
                       {item.title}

@@ -3,6 +3,8 @@ import { ArrowUpRight, BedDouble, Bath, Ruler } from "lucide-react";
 import house from "@/assets/images/ps1.png"; // use your image
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useApiQuery } from "@/hooks/apiQuery";
+import { IMG_URL } from "@/config/constant";
 const projects = Array(9).fill({
   title: "Kings Down",
   image: house,
@@ -18,20 +20,21 @@ const InfoBadge = ({ icon, text }) => {
     </div>
   );
 };
-const ProjectShowcase = () => {
+const ProjectShowcase = ({ data}) => {
+
   return (
     <section className="section-padding-x section-padding-y">
                 <h1 className='text-3xl lg:text-4xl xlg:text-5xl text-center font-semibold'>Project Showcase</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-        {projects.map((project, index) => (
-          <Link to={`/case-studies/${project.title}`}
+        {data?.map((project, index) => (
+          <Link to={`/case-studies/${project.id}`}
             key={index}
             className="relative rounded-2xl overflow-hidden bg-black group shadow-lg"
           >
             {/* Image */}
             <img
-              src={project.image}
+              src={IMG_URL + project?.after_images[0]}
               alt={project.title}
               className="w-full h-[480px] object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -51,9 +54,9 @@ const ProjectShowcase = () => {
 
             {/* Bottom Info */}
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
-              <InfoBadge icon={<BedDouble size={14} />} text={project.beds} />
-              <InfoBadge icon={<Bath size={14} />} text={project.baths} />
-              <InfoBadge icon={<Ruler size={14} />} text={project.size} />
+              <InfoBadge icon={<BedDouble size={14} />} text={project.bed_room} />
+              <InfoBadge icon={<Bath size={14} />} text={project.washroom} />
+              <InfoBadge icon={<Ruler size={14} />} text={project.square_feet} />
             </div>
           </Link>
         ))}

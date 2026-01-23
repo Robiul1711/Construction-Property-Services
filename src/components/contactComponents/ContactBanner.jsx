@@ -3,7 +3,7 @@ import banner from "@/assets/images/contactBg.png";
 import { FaHome } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
 
-const ContactBanner = () => {
+const ContactBanner = ({ data }) => {
   return (
     <div className="relative group overflow-hidden">
       {/* Background Image */}
@@ -35,7 +35,7 @@ const ContactBanner = () => {
           transition-transform duration-500
           group-hover:scale-105"
         >
-          Let's Start Your Project
+      {data?.contact_us?.title}
         </h1>
 
         <p
@@ -43,8 +43,7 @@ const ContactBanner = () => {
           transition-opacity duration-500
           group-hover:opacity-100"
         >
-          Ready to transform your property? Get in touch for a free consultation
-          and let's discuss how we can help.
+   {data?.contact_us?.sub_title}
         </p>
 
         {/* Breadcrumb */}

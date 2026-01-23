@@ -9,9 +9,9 @@ import { IMG_URL } from "@/config/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ClientSays = () => {
+const ClientSays = ({data}) => {
 
-  const { data, isLoading } = useApiQuery({
+  const { data: testimonialData, isLoading } = useApiQuery({
     queryKey: ["testimonials-data"], // Just the base key
     url: "/testimonials-data",
   
@@ -69,13 +69,10 @@ const ClientSays = () => {
       {/* Header */}
       <div ref={headerRef} className="text-center mb-12 md:mb-16">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 mb-4">
-          What Our Clients Say
+         {data?.client_title}
         </h2>
         <p className="text-gray-600 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-          Hear directly from our clients about their experiences with our
-          renovation, construction, and property management services. We take
-          pride in delivering quality, reliability, and results that exceed
-          expectations
+      {data?.client_content}
         </p>
       </div>
 
@@ -88,7 +85,7 @@ const ClientSays = () => {
               {/* Progress Bar */}
               <div className="absolute left-0 top-0 bottom-0 w-2 hidden md:flex items-center">
                 <div className="flex flex-col gap-4">
-                  {data?.data?.map((_, index) => (
+                  {testimonialData?.data?.map((_, index) => (
                     <span
                       key={index}
                       className={`w-2 h-12 rounded-full transition-all duration-300 ${
@@ -101,19 +98,19 @@ const ClientSays = () => {
 
               {/* Content */}
               <div ref={contentRef} className="md:pl-8 lg:pl-12">
-                {data?.data?.title &&
+                {testimonialData?.data?.title &&
                   
                 <p className="sm:text-lg md:text-xl lg:text-2xl text-gray-900 font-medium mb-8 leading-relaxed max-w-5xl mx-auto">
-                  { data?.data?.[activeIndex].title}
+                  { testimonialData?.data?.[activeIndex].title}
                 </p>
                 }
 
                 <div className="mb-8">
                   <h4 className="text-xl font-semibold text-gray-900 mb-1">
-                    {data?.data?.[activeIndex].name}
+                    {testimonialData?.data?.[activeIndex].name}
                   </h4>
                   <p className="text-sm text-gray-500">
-                    {data?.data?.[activeIndex].designation}
+                    {testimonialData?.data?.[activeIndex].designation}
                   </p>
                 </div>
 
@@ -136,7 +133,7 @@ const ClientSays = () => {
 
               {/* Mobile Dots */}
               <div className="flex gap-2 mt-6 md:hidden justify-center">
-                {data?.data?.map((_, index) => (
+                {testimonialData?.data?.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveIndex(index)}
@@ -153,8 +150,8 @@ const ClientSays = () => {
               <div className="relative w-full rounded-xl overflow-hidden bg-gray-200">
                 <img
                   ref={imageRef}
-                  src={IMG_URL + data?.data?.[activeIndex].image}
-                  alt={data?.data?.[activeIndex].name}
+                  src={IMG_URL + testimonialData?.data?.[activeIndex].image}
+                  alt={testimonialData?.data?.[activeIndex].name}
                   className="w-full h-[350px] object-cover"
                 />
               </div>

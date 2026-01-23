@@ -2,13 +2,14 @@ import React from "react";
 import { ImageProvider } from "../common/ImageProvider";
 import { FaHome } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
+import { IMG_URL } from "@/config/constant";
 
-const AboutBanner = () => {
+const AboutBanner = ({ data }) => {
   return (
     <div className="relative group overflow-hidden">
       {/* Background Image */}
       <img
-        src={ImageProvider.about}
+        src={IMG_URL + data?.cover_image || ImageProvider.about}
         alt="Contact Banner"
         className="
           w-full 
@@ -51,7 +52,7 @@ const AboutBanner = () => {
             group-hover:scale-105
           "
         >
-          Building Trust, Transforming Properties
+         {data?.title}
         </h1>
 
         <p
@@ -65,9 +66,7 @@ const AboutBanner = () => {
             group-hover:opacity-100
           "
         >
-          For over two decades, we've been the trusted partner for property
-          owners and investors seeking excellence in property management and
-          construction.
+          {data?.sub_title}
         </p>
 
         {/* Breadcrumb */}

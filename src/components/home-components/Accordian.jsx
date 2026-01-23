@@ -7,41 +7,14 @@ import { useApiQuery } from "@/hooks/apiQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Accordian = () => {
+const Accordian = ({ data }) => {
 
-  const { data, isLoading } = useApiQuery({
+  const { data: faqData, isLoading } = useApiQuery({
     queryKey: ["faqs-data"], // Just the base key
     url: "/faqs-data",
   
   });
-  console.log(data?.data);
-  const accordingData = [
-    {
-      title: "1. How long does a typical renovation project take?",
-      description:
-        "Wireframing outlines the basic structure and layout of a design, serving as a visual guide before detailed development.",
-    },
-    {
-      title: "2. How do you handle project timelines?",
-      description:
-        "User-centered design ensures products meet the needs and preferences of the end-users, enhancing usability and satisfaction.",
-    },
-    {
-      title: "3. Can timelines change during the project?",
-      description:
-        "Contrast in graphic design emphasizes differences, making elements stand out and improving visual hierarchy.",
-    },
-    {
-      title: "4. How do you ensure projects are completed on time?",
-      description:
-        "Responsive design ensures web pages adapt to various screen sizes, providing an optimal user experience on different devices.",
-    },
-    {
-      title: "5. Do you offer faster project options?",
-      description:
-        "Color theory guides the selection and combination of colors to evoke specific emotions, enhance readability, and create visually appealing designs.",
-    },
-  ];
+
 
   const [isPlusAccording, setIsPlusAccording] = useState(null);
 
@@ -75,11 +48,11 @@ const Accordian = () => {
         ref={titleRef}
         className="text-4xl lg:text-5xl font-medium mb-4 text-center"
       >
-        Frequently Asked Questions
+        {data?.faqs_title}
       </h2>
 
       <div className="flex gap-3 flex-col max-w-5xl mx-auto py-10">
-        {data?.data?.map((according, index) => (
+        {faqData?.data?.map((according, index) => (
           <article
             ref={(el) => (itemsRef.current[index] = el)}
             key={index}

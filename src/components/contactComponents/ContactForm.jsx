@@ -17,7 +17,7 @@ const contactSchema = z.object({
     .min(10, { message: "Message must be at least 10 characters" }),
 });
 
-const ContactForm = () => {
+const ContactForm = ({ data }) => {
   const {
     register,
     handleSubmit,
@@ -46,9 +46,7 @@ const { mutate, isPending } = useApiMutation({
       <div className=" space-y-6 sm:space-y-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Contact Us</h1>
         <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
-          Lorem ipsum dolor sit amet consectetur. Nunc ipsum tincidunt dictum
-          donec dui in cursus risus. Nunc lacus egestas ipsum dictumst volutpat
-          est sed diam tincidunt.
+  {data?.contact_us?.sub_title}
         </p>
 
         <div className="space-y-6">
@@ -56,7 +54,7 @@ const { mutate, isPending } = useApiMutation({
             <div className="bg-theme-primary p-3 rounded-full text-white">
               <Mail size={24} />
             </div>
-            <span className="text-gray-600">kejtamanna21@gmail.com</span>
+            <span className="text-gray-600">{data?.contact_us?.email}</span>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -64,7 +62,7 @@ const { mutate, isPending } = useApiMutation({
               <Phone size={24} />
             </div>
             <span className="text-gray-600 text-sm">
-              4074 Ebert summit suite 375 lake leonardchester
+              {data?.contact_us?.phone}
             </span>
           </div>
 
@@ -73,7 +71,7 @@ const { mutate, isPending } = useApiMutation({
               <MapPin size={24} />
             </div>
             <span className="text-gray-600 text-sm">
-              4074 Ebert summit suite 375 lake leonardchester
+              {data?.contact_us?.location}
             </span>
           </div>
         </div>

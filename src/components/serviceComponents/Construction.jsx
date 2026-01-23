@@ -14,7 +14,8 @@ import s5 from "../../assets/images/portfolio4.png";
 import s6 from "../../assets/images/portfolio5.png";
 import { cn } from "@/lib/utils";
 import { FaArrowRightLong } from "react-icons/fa6";
-const Construction = () => {
+import { IMG_URL } from "@/config/constant";
+const Construction = ({ data }) => {
   const images = [
     {
       src: s5,
@@ -71,14 +72,14 @@ const Construction = () => {
       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-12">
         Construction & Property Services
       </h1>
-      <HoverExpand_001 images={images} />
+      <HoverExpand_001 data={data} />
     </div>
   );
 };
 
 export default Construction;
 
-const HoverExpand_001 = ({ images, className }) => {
+const HoverExpand_001 = ({ data, className }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -108,7 +109,7 @@ const HoverExpand_001 = ({ images, className }) => {
             isMobile ? "flex-col" : "flex-row items-center",
           )}
         >
-          {images.map((image, index) => (
+          {data?.map((image, index) => (
             <motion.div
               key={index}
               className="relative cursor-pointer overflow-hidden rounded-3xl group"
@@ -157,7 +158,7 @@ const HoverExpand_001 = ({ images, className }) => {
                     </p>
 
                     <p className="text-xs sm:text-sm md:text-base text-white leading-relaxed">
-                      {image.subTitle}
+                      {image.short_desc}
                     </p>
 
                     <button className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white text-black font-medium text-xs sm:text-sm">
@@ -168,8 +169,8 @@ const HoverExpand_001 = ({ images, className }) => {
               </AnimatePresence>
 
               <img
-                src={image.src}
-                alt={image.alt}
+                src={IMG_URL + image.image}
+                alt={image.title}
                 className="size-full object-cover"
               />
 

@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ReadyProject = () => {
+const ReadyProject = ({ data }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const birdRef = useRef(null);
@@ -67,14 +67,11 @@ const ReadyProject = () => {
         <div className="relative z-10 flex mt-6">
           <div ref={contentRef} className="px-4 sm:px-6 lg:px-8">
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-medium my-4">
-              Ready to Start Your Project?
+              {data?.your_project_section_title}
             </h1>
 
             <p className="text-sm sm:text-base lg:text-lg text-[#131313] mb-6 mt-6 leading-relaxed max-w-lg">
-              Whether you’re planning a renovation, new construction, or need
-              reliable property management, our team is ready to help. Contact
-              us today to discuss your ideas and let’s turn your vision into
-              reality.
+              {data?.your_project_section_content}
             </p>
 
             <button className="bg-[#131313] text-white px-8 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-gray-600 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
